@@ -6,5 +6,7 @@ def sudy_nebo_lichy(cislo):
 
 
 if __name__ == "__main__":
+    print("zacatek")
     sudy_nebo_lichy(5)
     sudy_nebo_lichy(1000000)
+    print("konec")
