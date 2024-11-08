@@ -1,3 +1,2 @@
-Alice,30,JCU
-Bob,20,CZU
-Tom,18,SPS
+Ahoj Všichni!
+Ahoj Ostatní!
