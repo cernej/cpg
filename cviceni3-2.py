@@ -1,12 +1,18 @@
 import sys
 import csv
 
+class SouborNeexistuje(Exception):
+    pass
+
 def nacti_csv(soubor):
     data = []
-    with open(soubor, "r") as fp:
-        reader = csv.reader(fp)
-        for line in reader:
-            data.append(line)
+    try:
+        with open(soubor, "r") as fp:
+            reader = csv.reader(fp)
+            for line in reader:
+                data.append(line)
+    except FileNotFoundError:
+        raise SouborNeexistuje(soubor)
     return data
 
 def spoj_data(data1, data2):
@@ -51,5 +57,7 @@ if __name__ == "__main__":
         vysledek_zapisu = zapis_csv("vysledny_excel.csv", vysledna_data)
     except IndexError:
         print("Nebyly zadany soubory")
-    except FileNotFoundError:
-        print("Soubor neexistuje")
+    except SouborNeexistuje as e:
+        print(f"Soubor {e} neexistuje")
+    except Exception:
+        print("Nastala neocekavana chyba")
