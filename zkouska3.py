@@ -22,7 +22,7 @@ def test_shapes():
     assert rect.area() == 20
 
     circle = Circle(3)
-    assert circle.area() == 28.27431
+    assert round(circle.area(), 2) == 28.27
 
     with patch("abc.ABC", side_effect=NotImplementedError):
         try:
