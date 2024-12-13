@@ -1,35 +1,44 @@
-class Osoba:
-    def __init__(self, jmeno, vek) -> None:
-        self.jmeno = jmeno
-        self.vek = vek
+# Příklad 3: Základy OOP (dědičnost, abstrakce, zapouzdření)
+# Zadání:
+# Vytvořte třídu `Shape` s abstraktní metodou `area`.
+# Vytvořte dvě podtřídy: `Rectangle` a `Circle`.
+# - `Rectangle` má atributy `width` a `height` a implementuje metodu `area`.
+# - `Circle` má atribut `radius` a implementuje metodu `area`.
 
-    def __str__(self) -> str:
-        return f"Osoba(jmeno={self.jmeno}, vek={self.vek})"
+from abc import ABC, abstractmethod
 
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
 
-class Student(Osoba):
-    def __init__(self, jmeno, vek, rocnik) -> None:
-        super().__init__(jmeno, vek)
-        self.rocnik = rocnik
-    
-    def __str__(self) -> str:
-        return f"Student {self.jmeno} studuje {self.rocnik} rocnik"
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self._width = width
+        self._height = height
 
+    def area(self):
+        return self._width * self._height
 
-class Ucitel(Osoba):
-    def __init__(self, jmeno, vek, obor) -> None:
-        super().__init__(jmeno, vek)
-        self.obor = obor
-    
-    def __str__(self) -> str:
-        return f"Ucitel {self.jmeno} uci obor {self.obor}"
+class Circle(Shape):
+    def __init__(self, radius):
+        self._radius = radius
 
+    def area(self):
+        return 3.14159 * (self._radius ** 2)
 
-if __name__ == "__main__":
-    student1 = Student("Adam", 20, 2)
-    student2 = Student("Eva", 19, 1)
-    ucitel = Ucitel("Tomas", 40, "IT")
+from unittest.mock import patch, MagicMock, mock_open
 
-    print(student1)
-    print(student2)
-    print(ucitel)
+# Pytest testy pro Příklad 3
+def test_shapes():
+    rect = Rectangle(4, 5)
+    assert rect.area() == 20
+
+    circle = Circle(3)
+    assert circle.area() == 28.27431
+
+    with patch("abc.ABC", side_effect=NotImplementedError):
+        try:
+            shape = Shape()
+        except TypeError:
+            pass
