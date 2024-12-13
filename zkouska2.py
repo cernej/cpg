@@ -45,6 +45,6 @@ def test_fetch_and_save_data():
                     "id": 1,
                     "title": "Test post",
                     "body": "This is a test.",
-                    "user_name": "Leanne Graham"
+                    "userName": "Leanne Graham"
                 }
             ])
